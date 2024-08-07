@@ -1,6 +1,0 @@
-name: InventoryBuilderAPI
-version: '${project.version}'
-main: fr.as2treffle.inventorybuilderapi.InventoryBuilderAPI
-api-version: '1.21'
-commands:
-  ib:
