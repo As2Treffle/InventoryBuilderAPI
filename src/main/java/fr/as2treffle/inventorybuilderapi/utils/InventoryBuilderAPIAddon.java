@@ -140,7 +140,7 @@ public class InventoryBuilderAPIAddon implements Addon {
         if (action_name.equals("openPrevious")) {
 
             if (!InventoryBuilderAPI.previous_inv.containsKey(player.getUniqueId())){
-                player.closeInventory();
+                return;
             }
 
             InventoryContainer inventoryContainer = InventoryBuilderAPI.previous_inv.get(player.getUniqueId());
