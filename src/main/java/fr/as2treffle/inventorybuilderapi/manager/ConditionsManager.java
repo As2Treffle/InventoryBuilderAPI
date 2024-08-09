@@ -183,7 +183,7 @@ public class ConditionsManager {
                     return var <= value;
                 case EQUALS_OR_SUPERIOR:
                     return var >= value;
-                case EQUALS_:
+                case EQUALS:
                     return var == value;
                 case NOT_EQUALS:
                     return var != value;
@@ -204,7 +204,7 @@ public class ConditionsManager {
                     return var <= value;
                 case EQUALS_OR_SUPERIOR:
                     return var >= value;
-                case EQUALS_:
+                case EQUALS:
                     return var == value;
                 case NOT_EQUALS:
                     return var != value;
@@ -224,6 +224,10 @@ public class ConditionsManager {
 
             if (comparator == Comparator.CONTAINS) {
                 return v.endsWith(value_s);
+            }
+
+            if (comparator == Comparator.EQUALS) {
+                return v.equals(value_s);
             }
         }
 

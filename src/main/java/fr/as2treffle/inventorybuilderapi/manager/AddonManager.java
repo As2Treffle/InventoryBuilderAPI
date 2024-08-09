@@ -12,6 +12,5 @@ public class AddonManager {
 
     public static void registerAddon(Plugin plugin, Addon addon) {
         addons.put(plugin.getName(), addon);
-        Bukkit.getConsoleSender().sendMessage("§a" + plugin.getName() + " added !");
     }
 }

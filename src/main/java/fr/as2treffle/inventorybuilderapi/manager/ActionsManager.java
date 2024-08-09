@@ -157,6 +157,12 @@ public class ActionsManager {
     @SuppressWarnings("all")
     private static void callAction(YamlConfiguration file, Inventory inv, ClickType click, String action_name, String args, Player player, ItemStack stack, Integer slot, String id) {
 
+        if (id != null) {
+            if (file.contains(id.replace(".for-each", "") + ".list") && stack == null) {
+                return;
+            }
+        }
+
         if (file.contains("addons")) {
             ArrayList<String> addons = (ArrayList<String>) file.getStringList("addons");
             for (String addon_f : addons) {

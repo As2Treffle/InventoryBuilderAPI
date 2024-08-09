@@ -3,6 +3,7 @@ package fr.as2treffle.inventorybuilderapi;
 import fr.as2treffle.inventorybuilderapi.commands.IBCommand;
 import fr.as2treffle.inventorybuilderapi.commands.IBCommandTabCompleter;
 import fr.as2treffle.inventorybuilderapi.listeners.InventoryListeners;
+import fr.as2treffle.inventorybuilderapi.listeners.ServerListeners;
 import fr.as2treffle.inventorybuilderapi.manager.AddonManager;
 import fr.as2treffle.inventorybuilderapi.manager.InventoryContainer;
 import fr.as2treffle.inventorybuilderapi.utils.InventoryBuilderAPIAddon;
@@ -30,6 +31,7 @@ public final class InventoryBuilderAPI extends JavaPlugin {
         registerCommands();
         AddonManager.registerAddon(this, new InventoryBuilderAPIAddon());
         Bukkit.getPluginManager().registerEvents(new InventoryListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new ServerListeners(), this);
     }
 
     @Override

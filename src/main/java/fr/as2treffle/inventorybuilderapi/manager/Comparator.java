@@ -2,12 +2,12 @@ package fr.as2treffle.inventorybuilderapi.manager;
 
 public enum Comparator {
 
-    INFERIOR("<"),
-    SUPERIOR(">"),
-    EQUALS_OR_INFERIOR("<="),
-    EQUALS_OR_SUPERIOR(">="),
-    EQUALS_("=="),
-    NOT_EQUALS("!="),
+    INFERIOR("I"),
+    SUPERIOR("S"),
+    EQUALS_OR_INFERIOR("EI"),
+    EQUALS_OR_SUPERIOR("ES"),
+    EQUALS("EQ"),
+    NOT_EQUALS("NEQ"),
     STARTS_WITH("SW"),
     ENDS_WITH("EW"),
     CONTAINS("C"),
