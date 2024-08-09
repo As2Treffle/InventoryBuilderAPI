@@ -1,7 +1,0 @@
-main: fr.as2treffle.inventorybuilderapi.InventoryBuilderAPI
-version: 1.0.1
-api-version: 1.21
-author: As2Treffle
-name: InventoryBuilderAPI
-commands:
-  ib:
