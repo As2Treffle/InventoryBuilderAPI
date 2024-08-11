@@ -34,7 +34,7 @@ public class InventoryListeners implements Listener {
                 if (c != null) {
 
                     if (file.contains(c + ".actions")) {
-                        ActionsManager.performsActions(file, player, c, inventory, stack, slot, click);
+                        ActionsManager.performsActions(file, player, c, inventory, stack, slot, click, event.getCursor());
                     }
 
                     if (action == InventoryAction.MOVE_TO_OTHER_INVENTORY) {

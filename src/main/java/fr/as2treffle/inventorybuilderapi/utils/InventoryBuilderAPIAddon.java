@@ -24,7 +24,7 @@ public class InventoryBuilderAPIAddon implements Addon {
 
     @Override
     @SuppressWarnings("all")
-    public void performAction(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String action_name, String args, Integer slot) {
+    public void performAction(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String action_name, String args, Integer slot, ItemStack cursor) {
 
         if (action_name.equals("close")) {
             player.closeInventory();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface Addon {
 
-    void performAction(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String action_name, String args, Integer slot);
+    void performAction(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String action_name, String args, Integer slot, ItemStack cursor);
 
     boolean checkCondition(Player player, Inventory inventory, String condition, String args, Integer slot);
 

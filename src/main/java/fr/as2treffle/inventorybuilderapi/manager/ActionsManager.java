@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ActionsManager {
 
     @SuppressWarnings("all")
-    public static void performsActions(YamlConfiguration file, Player player, String c, Inventory inv, ItemStack stack, Integer slot, ClickType click) {
+    public static void performsActions(YamlConfiguration file, Player player, String c, Inventory inv, ItemStack stack, Integer slot, ClickType click, ItemStack cursor) {
 
         if (file.contains(c + ".actions.all")) {
             ArrayList<String> actions = (ArrayList<String>) file.getStringList(c + ".actions.all");
@@ -19,10 +19,10 @@ public class ActionsManager {
                 String[] split = action.split("=");
 
                 if (split.length == 2) {
-                    callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                    callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                 }
                 else {
-                    callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                    callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                 }
             }
         }
@@ -34,10 +34,10 @@ public class ActionsManager {
                     String[] split = action.split("=");
 
                     if (split.length == 2) {
-                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                     }
                     else {
-                        callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                        callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                     }
                 }
             }
@@ -50,10 +50,10 @@ public class ActionsManager {
                     String[] split = action.split("=");
 
                     if (split.length == 2) {
-                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                     }
                     else {
-                        callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                        callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                     }
                 }
             }
@@ -66,10 +66,10 @@ public class ActionsManager {
                     String[] split = action.split("=");
 
                     if (split.length == 2) {
-                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                     }
                     else {
-                        callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                        callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                     }
                 }
             }
@@ -82,10 +82,10 @@ public class ActionsManager {
                     String[] split = action.split("=");
 
                     if (split.length == 2) {
-                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                     }
                     else {
-                        callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                        callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                     }
                 }
             }
@@ -98,10 +98,10 @@ public class ActionsManager {
                     String[] split = action.split("=");
 
                     if (split.length == 2) {
-                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c);
+                        callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
                     }
                     else {
-                        callAction(file, inv, click, split[0], "", player, stack, slot, c);
+                        callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
                     }
                 }
             }
@@ -131,10 +131,10 @@ public class ActionsManager {
             String[] split = action.split("=");
 
             if (split.length == 2) {
-                callAction(file, inv, null, split[0], split[1], player, null, null, null);
+                callAction(file, inv, null, split[0], split[1], player, null, null, null, null);
             }
             else {
-                callAction(file, inv, null, split[0], "", player, null, null, null);
+                callAction(file, inv, null, split[0], "", player, null, null, null, null);
             }
         }
     }
@@ -146,16 +146,16 @@ public class ActionsManager {
             String[] split = action.split("=");
 
             if (split.length == 2) {
-                callAction(file, inv, null, split[0], split[1], player, null, null, null);
+                callAction(file, inv, null, split[0], split[1], player, null, null, null, null);
             }
             else {
-                callAction(file, inv, null, split[0], "", player, null, null, null);
+                callAction(file, inv, null, split[0], "", player, null, null, null, null);
             }
         }
     }
 
     @SuppressWarnings("all")
-    private static void callAction(YamlConfiguration file, Inventory inv, ClickType click, String action_name, String args, Player player, ItemStack stack, Integer slot, String id) {
+    private static void callAction(YamlConfiguration file, Inventory inv, ClickType click, String action_name, String args, Player player, ItemStack stack, Integer slot, String id, ItemStack cursor) {
 
         if (id != null) {
             if (file.contains(id.replace(".for-each", "") + ".list") && stack == null) {
@@ -176,7 +176,7 @@ public class ActionsManager {
                     if (addon != null) {
                         args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                         args = DataManager.replaceData(player, args);
-                        addon.performAction(player, inv, click, stack, action_name, args, slot);
+                        addon.performAction(player, inv, click, stack, action_name, args, slot, cursor);
                     }
                 }
                 else {
@@ -187,7 +187,7 @@ public class ActionsManager {
                     if (addon != null) {
                         args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                         args = DataManager.replaceData(player, args);
-                        addon.performAction(player, inv, click, stack, split1[1], args, slot);
+                        addon.performAction(player, inv, click, stack, split1[1], args, slot, cursor);
                     }
                 }
             }
@@ -199,7 +199,7 @@ public class ActionsManager {
             if (addon != null) {
                 args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                 args = DataManager.replaceData(player, args);
-                addon.performAction(player, inv, click, stack, action_name, args, slot);
+                addon.performAction(player, inv, click, stack, action_name, args, slot, cursor);
             }
         }
     }
