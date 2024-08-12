@@ -1,5 +1,6 @@
 package fr.as2treffle.inventorybuilderapi.manager;
 
+import fr.as2treffle.inventorybuilderapi.utils.Action;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -108,6 +109,25 @@ public class ActionsManager {
         }
     }
 
+    public static void performsActions(YamlConfiguration file, Player player, Inventory inv, ActionCause cause, String c, ItemStack stack, Integer slot, ItemStack cursor, ClickType click) {
+
+        String path = ".when-" + cause.toString().toLowerCase();
+
+        if (file.contains(c + path)) {
+            ArrayList<String> actions = (ArrayList<String>) file.getStringList(c + path);
+            for (String action : actions) {
+                String[] split = action.split("=");
+
+                if (split.length == 2) {
+                    callAction(file, inv, click, split[0], split[1], player, stack, slot, c, cursor);
+                }
+                else {
+                    callAction(file, inv, click, split[0], "", player, stack, slot, c, cursor);
+                }
+            }
+        }
+    }
+
     @SuppressWarnings("all")
     public static void performsActions(YamlConfiguration file, Player player, Inventory inv, ActionCause cause) {
 
@@ -176,7 +196,9 @@ public class ActionsManager {
                     if (addon != null) {
                         args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                         args = DataManager.replaceData(player, args);
-                        addon.performAction(player, inv, click, stack, action_name, args, slot, cursor);
+
+                        Action action = new Action(player, inv, click, stack, action_name, args, file, cursor, slot);
+                        addon.performAction(action);
                     }
                 }
                 else {
@@ -187,7 +209,9 @@ public class ActionsManager {
                     if (addon != null) {
                         args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                         args = DataManager.replaceData(player, args);
-                        addon.performAction(player, inv, click, stack, split1[1], args, slot, cursor);
+
+                        Action action = new Action(player, inv, click, stack, action_name, args, file, cursor, slot);
+                        addon.performAction(action);
                     }
                 }
             }
@@ -199,7 +223,9 @@ public class ActionsManager {
             if (addon != null) {
                 args = ListManager.parseListValue(args, ListManager.getList(player, id), slot);
                 args = DataManager.replaceData(player, args);
-                addon.performAction(player, inv, click, stack, action_name, args, slot, cursor);
+
+                Action action = new Action(player, inv, click, stack, action_name, args, file, cursor, slot);
+                addon.performAction(action);
             }
         }
     }

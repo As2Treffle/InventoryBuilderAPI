@@ -15,8 +15,7 @@ public class IBCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
 
-        if (commandSender instanceof Player) {
-            Player player = (Player) commandSender;
+        if (commandSender instanceof Player player) {
 
             if(args.length == 1) {
                 if (player.hasPermission("inventorybuilderapi.command.addons")) {

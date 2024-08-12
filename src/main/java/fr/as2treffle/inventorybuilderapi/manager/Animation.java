@@ -1,15 +1,12 @@
 package fr.as2treffle.inventorybuilderapi.manager;
 
-import fr.as2treffle.inventorybuilderapi.inventory.InventoryBuilder;
 import fr.as2treffle.inventorybuilderapi.itemstack.ItemStackBuilder;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Animation extends BukkitRunnable {
 
@@ -20,7 +17,7 @@ public class Animation extends BukkitRunnable {
     private final Player player;
     private final Integer slot;
     private Integer current_frame = 0;
-    private ItemStack stack;
+    private final ItemStack stack;
 
     public Animation(YamlConfiguration file, String id, Integer nb_frames, Integer speed, Player player, Integer slot, ItemStack itemStack) {
         this.id = id;

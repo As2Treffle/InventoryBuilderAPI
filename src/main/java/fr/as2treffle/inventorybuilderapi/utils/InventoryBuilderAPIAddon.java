@@ -24,7 +24,16 @@ public class InventoryBuilderAPIAddon implements Addon {
 
     @Override
     @SuppressWarnings("all")
-    public void performAction(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String action_name, String args, Integer slot, ItemStack cursor) {
+    public void performAction(Action action) {
+
+        Player player = action.getPlayer();
+        Inventory inventory = action.getInventory();
+        ClickType click = action.getClick();
+        ItemStack itemStack = action.getItemStack();
+        ItemStack cursor = action.getCursor();
+        Integer slot = action.getSlot();
+        String action_name = action.getAction();
+        String args = action.getArgs();
 
         if (action_name.equals("close")) {
             player.closeInventory();
@@ -149,13 +158,19 @@ public class InventoryBuilderAPIAddon implements Addon {
     }
 
     @Override
-    public boolean checkCondition(Player player, Inventory inventory, String condition, String args, Integer slot) {
+    public boolean checkCondition(Condition condition) {
 
-        if (condition.equals("hasPermission")) {
+        Player player = condition.getPlayer();
+        Inventory inventory = condition.getInventory();
+        String condition_name = condition.getCondition();
+        String args = condition.getArgs();
+        Integer slot = condition.getSlot();
+
+        if (condition_name.equals("hasPermission")) {
             return player.hasPermission(args);
         }
 
-        if (condition.equals("hasEnough")) {
+        if (condition_name.equals("hasEnough")) {
             String[] split = args.split(", ");
             if (split.length == 2) {
                 Material type = Material.valueOf(split[0]);
@@ -164,12 +179,12 @@ public class InventoryBuilderAPIAddon implements Addon {
             }
         }
 
-        if (condition.equals("isEmpty")) {
+        if (condition_name.equals("isEmpty")) {
             int a = Integer.parseInt(args);
             return inventory.getItem(a) == null;
         }
 
-        if (condition.equals("compare")) {
+        if (condition_name.equals("compare")) {
 
             args = PlaceholderAPI.setPlaceholders(player, args);
             String[] split = args.split(", ");
@@ -181,8 +196,8 @@ public class InventoryBuilderAPIAddon implements Addon {
     }
 
     @Override
-    public ItemStack getCustomItemStack(Player player, Inventory inventory, ClickType clickType, ItemStack itemStack, String method, String args) {
-        return null;
+    public String getPlaceholder(Placeholder placeholder) {
+        return "";
     }
 
     @Override

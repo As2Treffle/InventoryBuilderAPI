@@ -1,6 +1,7 @@
 package fr.as2treffle.inventorybuilderapi.manager;
 
 import fr.as2treffle.inventorybuilderapi.inventory.InventoryBuilder;
+import fr.as2treffle.inventorybuilderapi.utils.Condition;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -119,7 +120,7 @@ public class ConditionsManager {
     }
 
     @SuppressWarnings("all")
-    public static boolean callConditionMethod(YamlConfiguration file, Player player, Inventory inventory, String condition, String args, Integer slot) {
+    public static boolean callConditionMethod(YamlConfiguration file, Player player, Inventory inventory, String condition_name, String args, Integer slot) {
 
         if (file.contains("addons")) {
             ArrayList<String> addons = (ArrayList<String>) file.getStringList("addons");
@@ -133,7 +134,9 @@ public class ConditionsManager {
                     Addon addon = AddonManager.addons.get(addon_name);
                     if (addon != null) {
                         args = DataManager.replaceData(player, args);
-                        return addon.checkCondition(player, inventory, condition, args, slot);
+
+                        Condition condition = new Condition(player, inventory, condition_name, args, slot);
+                        return addon.checkCondition(condition);
                     }
                 }
                 else {
@@ -143,7 +146,9 @@ public class ConditionsManager {
                     String[] split1 = condition.split(split[1] + ".");
                     if (addon != null) {
                         args = DataManager.replaceData(player, args);
-                        return addon.checkCondition(player, inventory, condition, args, slot);
+
+                        Condition condition = new Condition(player, inventory, condition_name, args, slot);
+                        return addon.checkCondition(condition);
                     }
                 }
             }
@@ -154,7 +159,9 @@ public class ConditionsManager {
 
             if (addon != null) {
                 args = DataManager.replaceData(player, args);
-                return addon.checkCondition(player, inventory, condition, args, slot);
+
+                Condition condition = new Condition(player, inventory, condition_name, args, slot);
+                return addon.checkCondition(condition);
             }
         }
 

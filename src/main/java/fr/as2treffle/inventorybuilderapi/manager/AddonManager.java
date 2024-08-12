@@ -1,7 +1,5 @@
 package fr.as2treffle.inventorybuilderapi.manager;
 
-import fr.as2treffle.inventorybuilderapi.InventoryBuilderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;

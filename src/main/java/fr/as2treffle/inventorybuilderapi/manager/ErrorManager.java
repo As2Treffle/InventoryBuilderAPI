@@ -23,7 +23,7 @@ public class ErrorManager {
         if (player != null) {
             for (Object message : messages) {
                 if (message instanceof String) {
-                    player.sendMessage("- §c" + (String) message);
+                    player.sendMessage("- §c" + message);
                 }
             }
         }

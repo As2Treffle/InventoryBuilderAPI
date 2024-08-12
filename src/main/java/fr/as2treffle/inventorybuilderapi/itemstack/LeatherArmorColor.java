@@ -17,5 +17,5 @@ public enum LeatherArmorColor {
     SILVER,
     TEAL,
     WHITE,
-    YELLOW;
+    YELLOW
 }

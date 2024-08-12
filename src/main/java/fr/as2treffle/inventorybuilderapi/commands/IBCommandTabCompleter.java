@@ -27,8 +27,7 @@ public class IBCommandTabCompleter implements TabCompleter {
     public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
 
         ArrayList<String> tab = new ArrayList<>();
-        if (commandSender instanceof Player) {
-            Player player = (Player) commandSender;
+        if (commandSender instanceof Player player) {
 
             if (args.length == 1) {
                 if (player.hasPermission("inventorybuilderapi.command.view")) {
@@ -49,7 +48,7 @@ public class IBCommandTabCompleter implements TabCompleter {
 
                 if (player.hasPermission("inventorybuilderapi.command.addons")) {
                     if (args[0].equals("help")) {
-                        tab.addAll((Collection<? extends String>) AddonManager.addons.keySet());
+                        tab.addAll(AddonManager.addons.keySet());
                     }
                 }
             }

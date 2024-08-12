@@ -23,6 +23,7 @@ public class InventoryListeners implements Listener {
         ItemStack stack = event.getCurrentItem();
         ClickType click = event.getClick();
         InventoryAction action = event.getAction();
+        ItemStack cursor = event.getCursor();
 
         if (InventoryBuilderAPI.inv_opened.containsKey(player.getUniqueId())) {
 
@@ -34,15 +35,19 @@ public class InventoryListeners implements Listener {
                 if (c != null) {
 
                     if (file.contains(c + ".actions")) {
-                        ActionsManager.performsActions(file, player, c, inventory, stack, slot, click, event.getCursor());
+                        ActionsManager.performsActions(file, player, c, inventory, stack, slot, click, cursor);
+                        event.setCancelled((!file.contains(c + ".attributes.allow-deposit") || !file.contains(c + ".attributes.allow-pickup")));
                     }
 
-                    if (action == InventoryAction.MOVE_TO_OTHER_INVENTORY) {
+                    if (action.toString().startsWith("PLACE")) {
                         event.setCancelled(!file.contains(c + ".attributes.allow-deposit"));
-                        return;
+                        ActionsManager.performsActions(file, player, inventory, ActionCause.DEPOSIT, c, stack, slot, cursor, click);
                     }
 
-                    event.setCancelled(!file.contains(c + ".attributes.allow-pickup"));
+                    if (action.toString().startsWith("PICKUP")) {
+                        event.setCancelled(!file.contains(c + ".attributes.allow-pickup"));
+                        ActionsManager.performsActions(file, player, inventory, ActionCause.PICKUP, c, stack, slot, cursor, click);
+                    }
                 }
             }
         }
