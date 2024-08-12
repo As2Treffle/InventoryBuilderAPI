@@ -104,14 +104,16 @@ public class InventoryListeners implements Listener {
                     AnimationManager.playAnimations(player.getUniqueId());
 
                     if (file.contains("furnace.burn-time")) {
-                        int burntime = file.getInt("furnace.burn-time");
+                        String s = PlaceholdersManager.replacePlaceholders(player, file, inventory, file.getString("furnace.burn-time"));
+                        int burntime = Integer.parseInt(s);
                         InventoryView view = player.getOpenInventory();
                         view.setProperty(InventoryView.Property.BURN_TIME, burntime);
                         view.setProperty(InventoryView.Property.TICKS_FOR_CURRENT_FUEL, 100);
                     }
 
                     if (file.contains("furnace.cook-time")) {
-                        int cooktime = file.getInt("furnace.cook-time");
+                        String s = PlaceholdersManager.replacePlaceholders(player, file, inventory, file.getString("furnace.cook-time"));
+                        int cooktime = Integer.parseInt(s);
                         InventoryView view = player.getOpenInventory();
                         view.setProperty(InventoryView.Property.TICKS_FOR_CURRENT_SMELTING, 100);
                         view.setProperty(InventoryView.Property.COOK_TIME, cooktime);

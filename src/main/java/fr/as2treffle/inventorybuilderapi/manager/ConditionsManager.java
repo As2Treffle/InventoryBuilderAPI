@@ -129,7 +129,7 @@ public class ConditionsManager {
 
                 split[1] = split[1].replace(" ", "");
 
-                if (!condition.startsWith(split[1] + ".")) {
+                if (!condition_name.startsWith(split[1] + ".")) {
                     String addon_name = "InventoryBuilderAPI";
                     Addon addon = AddonManager.addons.get(addon_name);
                     if (addon != null) {
@@ -143,7 +143,7 @@ public class ConditionsManager {
                     String addon_name = split[0];
 
                     Addon addon = AddonManager.addons.get(addon_name);
-                    String[] split1 = condition.split(split[1] + ".");
+                    String[] split1 = condition_name.split(split[1] + ".");
                     if (addon != null) {
                         args = DataManager.replaceData(player, args);
 

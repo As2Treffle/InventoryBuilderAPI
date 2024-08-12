@@ -32,6 +32,7 @@ public class ItemStackBuilder {
         }
 
         String amount_s = inventory_file.getString(name + ".amount");
+        amount_s = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, amount_s);
         int amount = Integer.parseInt(DataManager.replaceData(player, amount_s));
 
         String type = inventory_file.getString(name + ".type");
@@ -83,7 +84,8 @@ public class ItemStackBuilder {
         }
 
         if (inventory_file.contains(name + ".name")) {
-            String display_name = PlaceholderAPI.setPlaceholders(player, inventory_file.getString(name + ".name"));
+            String display_name = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, inventory_file.getString(name + ".name"));
+            display_name = PlaceholderAPI.setPlaceholders(player, display_name);
             display_name = DataManager.replaceData(player, display_name);
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', display_name));
         }
@@ -92,7 +94,8 @@ public class ItemStackBuilder {
             ArrayList<String> lores = new ArrayList<>();
 
             for (String s : inventory_file.getStringList(name + ".lores")) {
-                String lore = PlaceholderAPI.setPlaceholders(player, s);
+                String lore = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, s);
+                lore = PlaceholderAPI.setPlaceholders(player, lore);
                 lore = DataManager.replaceData(player, lore);
                 lores.add(ChatColor.translateAlternateColorCodes('&', lore));
             }
@@ -106,6 +109,7 @@ public class ItemStackBuilder {
 
                 if (enchant_split.length == 2) {
 
+                    enchant_split[0] = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, enchant_split[0]);
                     enchant_split[0] = DataManager.replaceData(player, enchant_split[0]);
 
                     if (ErrorManager.isAnEnchantment(enchant_split[0].toUpperCase().replace(' ', '_'))) {
@@ -119,6 +123,7 @@ public class ItemStackBuilder {
 
             for (String s : inventory_file.getStringList(name + ".itemflags")) {
 
+                s = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, s);
                 s = DataManager.replaceData(player, s);
 
                 if (ErrorManager.isAnItemFlag(s.toUpperCase().replace(' ', '_'))) {
@@ -286,10 +291,12 @@ public class ItemStackBuilder {
     public static ItemStack buildListItemStack(YamlConfiguration inventory_file, Player player, String id, List list, Integer slot) {
 
         String amount_s = inventory_file.getString(id + ".amount");
+        amount_s = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, amount_s);
         amount_s = ListManager.parseListValue(amount_s, list, slot);
         int amount = Integer.parseInt(DataManager.replaceData(player, amount_s));
 
         String type = inventory_file.getString(id + ".type");
+        type = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, type);
         type = ListManager.parseListValue(type, list, slot);
         type = DataManager.replaceData(player, type);
 
@@ -308,6 +315,7 @@ public class ItemStackBuilder {
                     meta = (LeatherArmorMeta) stack.getItemMeta();
 
                     String color = inventory_file.getString(id + ".attributes.leather-color").toUpperCase();
+                    color = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, color);
                     color = ListManager.parseListValue(color, list, slot);
                     color = DataManager.replaceData(player, color);
 
@@ -344,7 +352,8 @@ public class ItemStackBuilder {
         }
 
         if (inventory_file.contains(id + ".name")) {
-            String display_name = PlaceholderAPI.setPlaceholders(player, inventory_file.getString(id + ".name"));
+            String display_name = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, inventory_file.getString(id + ".name"));
+            display_name = PlaceholderAPI.setPlaceholders(player, display_name);
             display_name = ListManager.parseListValue(display_name, list, slot);
             display_name = DataManager.replaceData(player, display_name);
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', display_name));
@@ -354,7 +363,8 @@ public class ItemStackBuilder {
             ArrayList<String> lores = new ArrayList<>();
 
             for (String s : inventory_file.getStringList(id + ".lores")) {
-                String lore = PlaceholderAPI.setPlaceholders(player, s);
+                String lore = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, s);
+                lore = PlaceholderAPI.setPlaceholders(player, lore);
                 lore = ListManager.parseListValue(lore, list, slot);
                 lore = DataManager.replaceData(player, lore);
                 lores.add(ChatColor.translateAlternateColorCodes('&', lore));
@@ -369,6 +379,7 @@ public class ItemStackBuilder {
 
                 if (enchant_split.length == 2) {
 
+                    enchant_split[0] = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, enchant_split[0]);
                     enchant_split[0] = ListManager.parseListValue(enchant_split[0], list, slot);
                     enchant_split[0] = DataManager.replaceData(player, enchant_split[0]);
 
@@ -383,6 +394,7 @@ public class ItemStackBuilder {
 
             for (String s : inventory_file.getStringList(id + ".itemflags")) {
 
+                s = PlaceholdersManager.replacePlaceholders(player, inventory_file, null, s);
                 s = ListManager.parseListValue(s, list, slot);
                 s = DataManager.replaceData(player, s);
 

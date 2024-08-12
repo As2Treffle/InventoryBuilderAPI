@@ -103,7 +103,7 @@ public class InventoryBuilderAPIAddon implements Addon {
                 }
                 else if (args.startsWith("list:")) {
                     String id = args.replace("list:", "");
-                    List list = ListManager.getList(player, id);
+                    fr.as2treffle.inventorybuilderapi.manager.List list = ListManager.getList(player, id);
 
                     ArrayList<Integer> slots = list.getSlots();
 
@@ -201,7 +201,11 @@ public class InventoryBuilderAPIAddon implements Addon {
     }
 
     @Override
-    public ArrayList<HashMap<String, Object>> getCustomList(Player player, Inventory inventory, String method, String args) {
+    public ArrayList<HashMap<String, Object>> getList(List list) {
+
+        Player player = list.getPlayer();
+        String method = list.getMethod();
+        String args = list.getArgs();
 
         ArrayList<HashMap<String, Object>> values = new ArrayList<>();
 
@@ -267,12 +271,12 @@ public class InventoryBuilderAPIAddon implements Addon {
     }
 
     @Override
-    public java.util.List<String> getItemStackMethods() {
+    public java.util.List<String> getPlaceholders() {
         return java.util.List.of();
     }
 
     @Override
-    public java.util.List<String> getListMethods() {
+    public java.util.List<String> getLists() {
         return java.util.List.of();
     }
 }

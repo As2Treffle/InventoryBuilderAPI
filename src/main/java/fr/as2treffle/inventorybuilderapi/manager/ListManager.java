@@ -70,7 +70,9 @@ public class ListManager {
                     Addon addon = AddonManager.addons.get(addon_name);
                     if (addon != null) {
                         args = DataManager.replaceData(player, args);
-                        return addon.getCustomList(player, inventory, method, args);
+
+                        fr.as2treffle.inventorybuilderapi.utils.List list = new fr.as2treffle.inventorybuilderapi.utils.List(player, inventory, method, args, file);
+                        return addon.getList(list);
                     }
                 }
                 else {
@@ -80,7 +82,9 @@ public class ListManager {
                     String[] split1 = method.split(split[1] + ".");
                     if (addon != null) {
                         args = DataManager.replaceData(player, args);
-                        return addon.getCustomList(player, inventory, split1[1], args);
+
+                        fr.as2treffle.inventorybuilderapi.utils.List list = new fr.as2treffle.inventorybuilderapi.utils.List(player, inventory, split1[1], args, file);
+                        return addon.getList(list);
                     }
                 }
             }
@@ -91,7 +95,9 @@ public class ListManager {
 
             if (addon != null) {
                 args = DataManager.replaceData(player, args);
-                return addon.getCustomList(player, inventory, method, args);
+
+                fr.as2treffle.inventorybuilderapi.utils.List list = new fr.as2treffle.inventorybuilderapi.utils.List(player, inventory, method, args, file);
+                return addon.getList(list);
             }
         }
 

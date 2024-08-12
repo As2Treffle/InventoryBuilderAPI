@@ -18,13 +18,13 @@ public interface Addon {
 
     String getPlaceholder(Placeholder placeholder);
 
-    ArrayList<HashMap<String, Object>> getCustomList(Player player, Inventory inventory, String method, String args);
+    ArrayList<HashMap<String, Object>> getList(fr.as2treffle.inventorybuilderapi.utils.List list);
 
     List<String> getActions();
 
     List<String> getConditions();
 
-    List<String> getItemStackMethods();
+    List<String> getPlaceholders();
 
-    List<String> getListMethods();
+    List<String> getLists();
 }

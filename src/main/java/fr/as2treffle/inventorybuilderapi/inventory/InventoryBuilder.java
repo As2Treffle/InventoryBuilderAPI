@@ -45,14 +45,15 @@ public class InventoryBuilder {
         }
 
         ArrayList<Object> settings = result.get(true);
-        Inventory inventory;
+        Inventory inventory = null;
 
         if (!ErrorManager.checkSchematic((ArrayList<String>) inventory_file.getStringList("inventory"), (InventoryType) settings.get(0), (Integer) settings.get(1))) {
             ErrorManager.sendErrorMessageToPlayer(player, ErrorType.INVENTORY_BAD_SCHEMATIC_ERROR);
             return null;
         }
 
-        String title = PlaceholderAPI.setPlaceholders(player, (String) settings.get(2));
+        String title = PlaceholdersManager.replacePlaceholders(player, inventory_file, inventory, (String) settings.get(2));
+        title = PlaceholderAPI.setPlaceholders(player, title);
         title = DataManager.replaceData(player, title);
         title = ChatColor.translateAlternateColorCodes('&', title);
 

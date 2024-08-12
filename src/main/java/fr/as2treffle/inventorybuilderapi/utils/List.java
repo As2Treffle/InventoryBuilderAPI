@@ -4,7 +4,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class Placeholder {
+public class List {
 
     private final Player player;
     private final Inventory inventory;
@@ -12,7 +12,7 @@ public class Placeholder {
     private final String args;
     private final YamlConfiguration file;
 
-    public Placeholder(Player player, Inventory inventory, String method, String args, YamlConfiguration file) {
+    public List(Player player, Inventory inventory, String method, String args, YamlConfiguration file) {
         this.player = player;
         this.inventory = inventory;
         this.method = method;
@@ -20,16 +20,8 @@ public class Placeholder {
         this.file = file;
     }
 
-    public YamlConfiguration getInventoryFile() {
-        return file;
-    }
-
     public Inventory getInventory() {
         return inventory;
-    }
-
-    public String getMethod() {
-        return method;
     }
 
     public Player getPlayer() {
@@ -38,5 +30,13 @@ public class Placeholder {
 
     public String getArgs() {
         return args;
+    }
+
+    public YamlConfiguration getFile() {
+        return file;
+    }
+
+    public String getMethod() {
+        return method;
     }
 }
